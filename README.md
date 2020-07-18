@@ -1,5 +1,8 @@
 Oh-My-Zsh, Powerlevel10k, and Neofetch
-=========
+
+[![Build Status](https://travis-ci.com/LocalHappiness/ansible-zsh-p10k-role.svg?branch=master)](https://travis-ci.com/LocalHappiness/ansible-zsh-p10k-role)
+------------
+
 Installs the following:
 - [zsh](https://www.zsh.org/)
 - [oh-my-zsh](https://ohmyz.sh/)
