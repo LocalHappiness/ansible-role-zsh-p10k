@@ -1,0 +1,8 @@
+---
+- name: Copy a new neofetch.conf file into to /home/{{ username }}/.config/neofetch/config.conf
+  become: yes
+  become_user: "{{ username }}"
+  copy:
+    src: neofetch.conf
+    dest: "/home/{{ username }}/.config/neofetch/config.conf"
+    mode: u=rw,g=r,o=r
