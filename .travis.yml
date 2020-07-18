@@ -8,8 +8,7 @@ dist: xenial
 sudo: false
 
 env:
-  - USER={{ username }}
-  - HOME
+  - USER="{{ username }}"
 
 # Install ansible
 addons:
