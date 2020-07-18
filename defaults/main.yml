@@ -1,6 +1,4 @@
 ---
 # defaults file for ansible-zsh-p10k-role
-usergroup: root
-# User configuration
 # Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
 username: josh
