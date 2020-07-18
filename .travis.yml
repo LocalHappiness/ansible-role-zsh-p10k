@@ -7,9 +7,6 @@ dist: xenial
 # Use the new container infrastructure
 sudo: false
 
-env:
-  - USER="{{ username }}"
-
 # Install ansible
 addons:
   apt:
@@ -27,7 +24,6 @@ install:
 script:
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
-  - ansible-playbook tests/test.yml -i tests/inventory
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

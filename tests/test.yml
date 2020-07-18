@@ -1,7 +1,6 @@
 ---
 - hosts: localhost
-  remote_user: josh
-  sudo_user: root
+  remote_user: root
   tasks:
   roles:
     - ansible-zsh-p10k-role
