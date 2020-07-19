@@ -6,7 +6,7 @@ Oh-My-Zsh, Powerlevel10k, and Neofetch
 Installs the following:
 - [zsh](https://www.zsh.org/)
 - [oh-my-zsh](https://ohmyz.sh/)
-- [Powerlevel10k Theme](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
+- [Powerlevel10k Theme](https://github.com/romkatv/powerlevel10k)
 - [Neofetch](https://github.com/dylanaraps/neofetch)
 
 This does not install fonts please install the font you would like to use:

@@ -9,7 +9,9 @@ usergroup: josh
 oh_my_zsh_plugins:
   - git
   - virtualenv
+  - safe-paste
   - colored-man-pages
+  - command-not-found
 
 oh_my_zsh_left_prompt:
   - virtualenv

@@ -23,6 +23,37 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 ###################################################
+# ZSH Settings
+###################################################
+
+setopt AUTO_CD
+setopt BEEP
+#setopt CORRECT
+setopt HIST_BEEP
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_VERIFY
+setopt INC_APPEND_HISTORY
+setopt INTERACTIVE_COMMENTS
+setopt MAGIC_EQUAL_SUBST
+setopt NO_NO_MATCH
+setopt NOTIFY
+setopt NUMERIC_GLOB_SORT
+setopt PROMPT_SUBST
+setopt SHARE_HISTORY
+
+HISTFILE="$HOME/.cache/zsh_history"
+HIST_STAMPS=mm/dd/yyyy
+HISTSIZE=5000
+SAVEHIST=5000
+ZLE_RPROMPT_INDENT=0
+WORDCHARS=${WORDCHARS//\/}
+
+###################################################
 # If you come from bash you might have to change your $PATH.
 ###################################################
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
@@ -57,9 +88,9 @@ POWERLEVEL9K_OS_ICON_FOREGROUND=white
 POWERLEVEL9K_USER_BACKGROUND=grey15
 POWERLEVEL9K_USER_FOREGROUND=deepskyblue2
 
-## LOCK
-POWERLEVEL9K_LOCK_BACKGROUND=grey30
-POWERLEVEL9K_LOCK_FOREGROUND=red
+## FORBIDDEN LOCK
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND=red
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND=grey30
 
 ## DIR HOME
 POWERLEVEL9K_DIR_HOME_BACKGROUND=grey30
@@ -72,7 +103,9 @@ POWERLEVEL9K_DIR_DEFAULT_FOREGROUND=white
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND=grey30
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND=white
 
-## VSC
+
+
+## VCS
 POWERLEVEL9K_VCS_CLEAN_FOREGROUND=cyan
 POWERLEVEL9K_VCS_CLEAN_BACKGROUND=black
 POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=white
@@ -85,11 +118,8 @@ POWERLEVEL9K_CONTEXT_BACKGROUND=grey19
 POWERLEVEL9K_CONTEXT_TEMPLATE=%F{white}%n%f
 
 ## BATTERY
-POWERLEVEL9K_BATTERY_CHARGING=yellow
-POWERLEVEL9K_BATTERY_CHARGED=green
-POWERLEVEL9K_BATTERY_DISCONNECTED=$DEFAULT_COLOR
-POWERLEVEL9K_BATTERY_LOW_THRESHOLD=lightgreen
-POWERLEVEL9K_BATTERY_LOW_COLOR=red
+
+POWERLEVEL9K_BATTERY_LEVEL_FOREGROUND=(darkred orange4 yellow4 yellow4 chartreuse3 green3 green4 darkgreen)
 
 ## LOAD
 POWERLEVEL9K_LOAD_BACKGROUND=grey23
@@ -143,9 +173,20 @@ POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
 ## CONTEXT
 POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
 
+## VCS
+POWERLEVEL9K_VCS_SHORTEN_LENGTH=4
+POWERLEVEL9K_VCS_SHORTEN_MIN_LENGTH=11
+POWERLEVEL9K_VCS_SHORTEN_STRATEGY="truncate_from_right"
+POWERLEVEL9K_VCS_SHORTEN_DELIMITER=".."
+
 ## STATUS
 POWERLEVEL9K_STATUS_VERBOSE=true
 POWERLEVEL9K_STATUS_CROSS=true
+
+## BATTERY
+POWERLEVEL9K_BATTERY_HIDE_ABOVE_THRESHOLD=95
+POWERLEVEL9K_BATTERY_VERBOSE=true
+POWERLEVEL9K_BATTERY_STAGES="▁▂▃▄▅▆▇█"
 
 ## LOAD
 POWERLEVEL9K_LOAD_WHICH=5
@@ -176,9 +217,9 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 # PROMPT LEFT AND RIGHT
 ###################################################
 ## RIGHT elements
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=({{ oh_my_zsh.left | default(oh_my_zsh_left_prompt) | join(' ') }})
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=({{ oh_my_zsh_left_prompt | join(' ') }})
 ## LEFT elements
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=({{ oh_my_zsh.right | default(oh_my_zsh_right_prompt) | join(' ') }})
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=({{ oh_my_zsh_right_prompt | join(' ') }})
 
 ###################################################
 # EXTRA OPTIONS
@@ -201,7 +242,23 @@ HIST_STAMPS="mm/dd/yyyy"
 ###################################################
 # PLUGINS
 ###################################################
-plugins=({{ oh_my_zsh.plugins | default(oh_my_zsh_plugins) | join(' ') }})
+plugins=({{ oh_my_zsh_plugins | join(' ') }})
+
+_source_plugin() {
+	plugin_installed=false
+	plugin_name="$1"
+
+	for basedir in /usr/share/zsh/plugins /usr/share
+	do
+		plugin="$basedir/$plugin_name/$plugin_name.zsh"
+		[ -f "$plugin" ] \
+			&& source "$plugin" \
+			&& plugin_installed=true
+	done
+
+	[ $plugin_installed = false ] \
+		&& echo -e "\033[33m[ ! ]\033[0m ZSH ${plugin_name#zsh-} not installed"
+}
 
 ###################################################
 # SOURCE
@@ -224,7 +281,6 @@ export LANGUAGE=en_US
  else
    export EDITOR='vi'
  fi
-
 ###################################################
 # ALIASES
 ###################################################
