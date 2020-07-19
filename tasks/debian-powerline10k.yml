@@ -1,10 +1,9 @@
 ---
 - name: git clone powerline10k theme
-  become: yes
   become_user: "{{ username }}"
   git:
     depth: "1"
     repo: https://github.com/romkatv/powerlevel10k.git
     dest: "/home/{{ username }}/.oh-my-zsh/custom/themes/powerlevel10k"
     clone: yes
-    update: yes
+    update: no

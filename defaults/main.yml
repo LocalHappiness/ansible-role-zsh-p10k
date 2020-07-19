@@ -2,3 +2,26 @@
 # defaults file for ansible-zsh-p10k-role
 # Important: oh-my-zsh is installed per user so you need to specify the users to install it for.
 username: josh
+usergroup: josh
+
+# Install plugins for oh-my-zsh
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
+oh_my_zsh_plugins:
+  - git
+  - virtualenv
+  - colored-man-pages
+
+oh_my_zsh_left_prompt:
+  - virtualenv
+  - os_icon
+  - root_indicator
+  - context
+  - dir_writable
+  - dir
+  - vcs
+
+oh_my_zsh_right_prompt:
+  - load
+  - ram
+  - ip
+  - host

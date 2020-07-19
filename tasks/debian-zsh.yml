@@ -1,20 +1,13 @@
 ---
 - name: Install dependencies
   become: yes
-  register: results
   apt:
     name:
       - git
       - zsh
-      - neofetch
     state: latest
     update_cache: yes
     cache_valid_time: 3600
-
-- name: Installed from APT
-  debug:
-    var: "{{ result.stdout | to_nice_yaml }}"
-    verbosity: 2
 
 - name: Check if .oh-my-zsh exists /home/{{ username }}/.oh-my-zsh
   become: yes
@@ -26,24 +19,25 @@
 - name: Directory .oh-my-zsh exists
   debug:
     msg: "Success, path exists and user can read stats will skip cloning oh-my-zsh"
-  when: stat_oh_my_zsh_result.stat.isdir is not defined
+  when: stat_oh_my_zsh_result.stat.isdir is defined
 
 - name: clone oh-my-zsh for {{ username }}
-  tags:
-    - skip_ansible_lint
   become: yes
   become_user: "{{ username }}"
-  command: 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended'
-  args:
-    chdir: "/home/{{ username }}"
-    creates: "/home/{{ username }}/.oh-my-zsh"
-  when: stat_oh_my_zsh_result.stat.isdir is defined
+  git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "/home/{{ username }}/.oh-my-zsh"
+    clone: yes
+    update: no
+  when: stat_oh_my_zsh_result.stat.isdir is not defined
 
 - name: set permissions of oh-my-zsh for {{ username }}
   become: yes
   file:
     path: "/home/{{ username }}/.oh-my-zsh"
-    mode: "go-w"
+    owner: "{{ username }}"
+    group: "{{ usergroup }}"
+    mode: "0760"
     recurse: yes
 
 - name: set default shell for {{ username }}
@@ -55,7 +49,7 @@
 - name: write .zshrc for user {{ username }}
   become: yes
   become_user: "{{ username }}"
-  copy:
+  template:
     src: zshrc.j2
     dest: "/home/{{ username }}/.zshrc"
     mode: "u=rw,go=r"
