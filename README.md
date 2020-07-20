@@ -7,6 +7,7 @@ Installs the following:
 - [zsh](https://www.zsh.org/)
 - [oh-my-zsh](https://ohmyz.sh/)
 - [Powerlevel10k Theme](https://github.com/romkatv/powerlevel10k)
+- [Solarized Color Theme](https://github.com/seebi/dircolors-solarized)
 - [Neofetch](https://github.com/dylanaraps/neofetch)
 
 This does not install fonts please install the font you would like to use:

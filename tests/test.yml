@@ -3,4 +3,4 @@
   remote_user: root
   tasks:
   roles:
-    - ansible-zsh-p10k-role
+    - ansible-role-zsh-p10k

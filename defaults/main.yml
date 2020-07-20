@@ -13,6 +13,7 @@ oh_my_zsh_plugins:
   - colored-man-pages
   - command-not-found
 
+# What will be displayed on prompts
 oh_my_zsh_left_prompt:
   - virtualenv
   - os_icon

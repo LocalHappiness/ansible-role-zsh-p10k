@@ -1,0 +1,9 @@
+---
+- name: git clone Solarized Color Theme for LS_COLORS
+  become_user: "{{ username }}"
+  git:
+    depth: "1"
+    repo: https://github.com/seebi/dircolors-solarized.git
+    dest: "/home/{{ username }}/.config/dircolors-solarized"
+    clone: yes
+    update: yes
