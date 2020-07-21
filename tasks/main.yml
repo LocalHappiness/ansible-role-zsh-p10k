@@ -1,5 +1,4 @@
 ---
-# tasks file for ansible-zsh-p10k-role
 - import_tasks: debian-zsh.yml
   when: ansible_facts['os_family'] == 'Debian'
 

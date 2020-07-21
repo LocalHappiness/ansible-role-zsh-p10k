@@ -1,14 +1,13 @@
 ---
 - name: Install dependencies
-  become: yes
+  become: true
   register: results
   apt:
     name:
       - neofetch
-    state: latest
 
 - name: Create a directory if it does not exist
-  become: yes
+  become: true
   become_user: "{{ username }}"
   file:
     path: /home/{{ username }}/.config/neofetch
@@ -16,7 +15,7 @@
     mode: "0760"
 
 - name: Copy a new neofetch.conf file into to /home/{{ username }}/.config/neofetch/config.conf
-  become: yes
+  become: true
   become_user: "{{ username }}"
   copy:
     src: neofetch.conf

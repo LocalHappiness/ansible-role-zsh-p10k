@@ -1,0 +1,30 @@
+---
+- name: Verify
+  become: true
+  hosts: all
+
+  vars:
+    username: josh
+
+  tasks:
+    - name: Verifying P10k theme directory
+      stat:
+        path: /home/{{ username }}/.oh-my-zsh/custom/themes/powerlevel10k
+      register: a
+    - assert:
+        that:
+          - a.stat.exists and a.stat.isdir
+    - name: Verifying dircolors-solarized directory
+      stat:
+        path: /home/{{ username }}/.config/dircolors-solarized
+      register: b
+    - assert:
+        that:
+          - b.stat.exists and b.stat.isdir
+    - name: Verifying neofetch directory
+      stat:
+        path: /home/{{ username }}/.config/neofetch
+      register: c
+    - assert:
+        that:
+          - c.stat.exists and c.stat.isdir

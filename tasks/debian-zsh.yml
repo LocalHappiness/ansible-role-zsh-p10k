@@ -1,17 +1,16 @@
 ---
 - name: Install dependencies
-  become: yes
+  become: true
   apt:
     name:
       - git
       - zsh
       - tree
-    state: latest
     update_cache: yes
     cache_valid_time: 3600
 
 - name: Check if .oh-my-zsh exists /home/{{ username }}/.oh-my-zsh
-  become: yes
+  become: true
   become_user: "{{ username }}"
   stat:
     path: "/home/{{ username }}/.oh-my-zsh"
@@ -23,7 +22,7 @@
   when: stat_oh_my_zsh_result.stat.isdir is defined
 
 - name: clone oh-my-zsh for {{ username }}
-  become: yes
+  become: true
   become_user: "{{ username }}"
   git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
@@ -32,23 +31,23 @@
     update: no
   when: stat_oh_my_zsh_result.stat.isdir is not defined
 
-- name: set permissions of oh-my-zsh for {{ username }}
-  become: yes
-  file:
-    path: "/home/{{ username }}/.oh-my-zsh"
-    owner: "{{ username }}"
-    group: "{{ usergroup }}"
-    mode: "0760"
-    recurse: yes
+# - name: set permissions of oh-my-zsh for {{ username }}
+#   become: true
+#   file:
+#     path: "/home/{{ username }}/.oh-my-zsh"
+#     owner: "{{ username }}"
+#     group: "{{ usergroup }}"
+#     mode: "0760"
+#     recurse: yes
 
 - name: set default shell for {{ username }}
-  become: yes
+  become: true
   user:
     name: "{{ username }}"
     shell: /bin/zsh
 
 - name: write .zshrc for user {{ username }}
-  become: yes
+  become: true
   become_user: "{{ username }}"
   template:
     src: zshrc.j2

@@ -1,5 +1,13 @@
 ---
-- name: git clone powerline10k theme
+- name: Check if .oh-my-zsh exists /home/{{ username }}/.oh-my-zsh
+  become: true
+  become_user: "{{ username }}"
+  stat:
+    path: "/home/{{ username }}/.oh-my-zsh/custom/themes/powerlevel10k"
+  register: stat_p10k_result
+
+- name: GIT clone powerline10k theme
+  become: true
   become_user: "{{ username }}"
   git:
     depth: "1"
@@ -7,3 +15,15 @@
     dest: "/home/{{ username }}/.oh-my-zsh/custom/themes/powerlevel10k"
     clone: yes
     update: no
+  when: stat_p10k_result.stat.isdir is not defined
+
+- name: Updating powerline10k theme
+  become: true
+  become_user: "{{ username }}"
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "/home/{{ username }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    clone: yes
+    force: yes
+    update: no
+  when: stat_p10k_result.stat.isdir is defined

@@ -1,5 +1,6 @@
 ---
 - name: git clone Solarized Color Theme for LS_COLORS
+  become: true
   become_user: "{{ username }}"
   git:
     depth: "1"
