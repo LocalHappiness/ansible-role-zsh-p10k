@@ -12,6 +12,10 @@
       apt: update_cache=yes cache_valid_time=3600
       when: ansible_os_family == 'Debian'
       changed_when: false
+    - name: Install the package "git"
+      apt:
+        name: git
+      when: ansible_os_family == 'Debian'
     - name: Add the user {{ username }} with a specific uid and a primary group of {{ usergroup }}
       user:
         name: "{{ username }}"
