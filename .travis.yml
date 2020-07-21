@@ -12,7 +12,7 @@ services:
 before_install:
   - sudo apt-get -qq update
 install:
-  - python3 -m install molecule yamllint ansible-lint docker
+  - pip install molecule yamllint ansible-lint docker
   # - python3 -m pip install required driver (e.g. docker, shade, boto, apache-libcloud)
 script:
   - molecule test
