@@ -1,9 +1,9 @@
-Oh-My-Zsh, Powerlevel10k, and Neofetch
+# Ansible Role for Oh-My-Zsh
 
-[![Build Status](https://travis-ci.com/LocalHappiness/ansible-zsh-p10k-role.svg?branch=master)](https://travis-ci.com/LocalHappiness/ansible-zsh-p10k-role)
+[![Build Status](https://travis-ci.com/LocalHappiness/ansible-role-zsh-p10k.svg?branch=master)](https://travis-ci.com/LocalHappiness/ansible-role-zsh-p10k)
 ------------
 ![demo](./demo.gif)
-Installs the following:
+## Installs the following:
 - [zsh](https://www.zsh.org/)
 - [oh-my-zsh](https://ohmyz.sh/)
 - [Powerlevel10k Theme](https://github.com/romkatv/powerlevel10k)
@@ -22,12 +22,12 @@ Role Variables
 --------------
 ```yaml
 #defaults/main
-username: 
+username:
 ```
 Dependencies
 ------------
 
-This role install all dependencies such as (git and curl) 
+This role install all dependencies such as (git and curl)
 
 Example Playbook
 ----------------
