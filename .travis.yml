@@ -1,1 +1,17 @@
 ---
+sudo: required
+language: python
+env:
+  matrix:
+    - MOLECULE_DISTRO: ubuntu2004
+    - MOLECULE_DISTRO: ubuntu1804
+services:
+  - docker
+addons:
+  apt:
+    update: true
+install:
+  - pip install molecule yamllint ansible-lint docker
+  # - python3 -m pip install required driver (e.g. docker, shade, boto, apache-libcloud)
+script:
+  - molecule test
