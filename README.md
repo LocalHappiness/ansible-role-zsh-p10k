@@ -1,6 +1,6 @@
 # Ansible Role for Oh-My-Zsh
 
-[![Build Status](https://travis-ci.com/LocalHappiness/ansible-role-zsh-p10k.svg?branch=master)](https://travis-ci.com/LocalHappiness/ansible-role-zsh-p10k)
+<!-- [![Build Status](https://travis-ci.com/LocalHappiness/ansible-role-zsh-p10k.svg?branch=master)](https://travis-ci.com/LocalHappiness/ansible-role-zsh-p10k) -->
 ------------
 ![demo](./demo.gif)
 ## Installs the following:
@@ -16,7 +16,9 @@ This does not install fonts please install the font you would like to use:
 Requirements
 ------------
 
-Ubuntu >= 18.04
+Ubuntu:
+- 20.04
+- 18.04
 
 Role Variables
 --------------
